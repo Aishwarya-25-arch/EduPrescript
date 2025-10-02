@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% set show_sidebar = true %}
+
+{% block title %}Teacher Dashboard - EduPrescript{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('teacher_dashboard') }}" class="nav-item active">
+    <i class="fas fa-home"></i>
+    <span>Dashboard</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-users"></i>
+    <span>All Students</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-chart-bar"></i>
+    <span>Analytics</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-bell"></i>
+    <span>Alerts</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-cog"></i>
+    <span>Settings</span>
+</a>
+<a href="{{ url_for('logout') }}" class="nav-item">
+    <i class="fas fa-sign-out-alt"></i>
+    <span>Logout</span>
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Teacher Dashboard</h1>
+    <p class="subtitle">Monitor and support your students' progress</p>
+</div>
+
+<div class="card students-table-card">
+    <div class="card-header">
+        <h2><i class="fas fa-list"></i> Student Overview</h2>
+        <div class="filter-controls">
+            <select id="riskFilter" class="filter-select">
+                <option value="all">All Students</option>
+                <option value="high">High Risk</option>
+                <option value="medium">Medium Risk</option>
+                <option value="low">Low Risk</option>
+            </select>
+            <select id="gradeFilter" class="filter-select">
+                <option value="all">All Grades</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
+            </select>
+            <input type="text" id="searchStudent" class="search-input" placeholder="Search students...">
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="students-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>Attendance</th>
+                        <th>GPA</th>
+                        <th>Risk Score</th>
+                        <th>Last Updated</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                        {% set risk_level = 'low' %}
+                        {% if student[4] >= 70 %}
+                            {% set risk_level = 'high' %}
+                        {% elif student[4] >= 30 %}
+                            {% set risk_level = 'medium' %}
+                        {% endif %}
+
+                        <tr class="student-row" data-risk="{{ risk_level }}" data-grade="{{ student[2] }}">
+                            <td>
+                                <div class="student-name">
+                                    <i class="fas fa-user-circle"></i>
+                                    <span>{{ student[1] }}</span>
+                                </div>
+                            </td>
+                            <td>{{ student[2] }}</td>
+                            <td>{{ student[3] }}%</td>
+                            <td>—</td>  {# GPA placeholder #}
+                            <td><span class="risk-badge {{ risk_level }}">{{ risk_level.capitalize() }} Risk</span></td>
+                            <td>Today</td>
+                            <td>
+                                <a href="{{ url_for('student_profile', student_id=student[0]) }}" class="btn-sm">View</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

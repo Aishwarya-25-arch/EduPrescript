@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% set show_sidebar = true %}
+
+{% block title %}Student Dashboard - EduPrescript{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('student_dashboard') }}" class="nav-item active">
+    <i class="fas fa-home"></i>
+    <span>Dashboard</span>
+</a>
+<a href="{{ url_for('prescriptions') }}" class="nav-item">
+    <i class="fas fa-clipboard-list"></i>
+    <span>My Prescriptions</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-user"></i>
+    <span>Profile</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-cog"></i>
+    <span>Settings</span>
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Welcome back, Alex!</h1>
+    <p class="subtitle">Here's your academic progress overview</p>
+</div>
+
+<div class="dashboard-grid">
+    <div class="card profile-card">
+        <div class="card-header">
+            <h2><i class="fas fa-user-circle"></i> My Profile</h2>
+        </div>
+        <div class="card-body profile-info">
+            <div class="avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <h3>Alex Johnson</h3>
+            <p class="grade-badge">Grade 10</p>
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Attendance</span>
+                    <span class="stat-value success">92%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Overall GPA</span>
+                    <span class="stat-value">3.4</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card progress-card">
+        <div class="card-header">
+            <h2><i class="fas fa-tasks"></i> Progress Tracker</h2>
+        </div>
+        <div class="card-body">
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Assignments Completed</span>
+                    <span class="progress-value">12/15</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 80%"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Homework Submission Rate</span>
+                    <span class="progress-value">85%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Test Preparation</span>
+                    <span class="progress-value">7/10</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card risk-card">
+        <div class="card-header">
+            <h2><i class="fas fa-chart-line"></i> Risk Assessment</h2>
+        </div>
+        <div class="card-body risk-indicator">
+            <div class="circular-progress low-risk">
+                <div class="circle-content">
+                    <div class="risk-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Low Risk</h3>
+                </div>
+            </div>
+            <p class="risk-message">You're doing great! Keep up the good work and stay on track with your assignments.</p>
+        </div>
+    </div>
+
+    <div class="card ai-tips-card">
+        <div class="card-header">
+            <h2><i class="fas fa-lightbulb"></i> AI Tips for You</h2>
+        </div>
+        <div class="card-body">
+            <div class="tip-item">
+                <i class="fas fa-star"></i>
+                <p><strong>Great job on math!</strong> Your recent test scores show improvement. Consider reviewing algebra concepts to maintain this momentum.</p>
+            </div>
+            <div class="tip-item">
+                <i class="fas fa-clock"></i>
+                <p><strong>Time management tip:</strong> You tend to submit assignments close to deadlines. Try starting 2 days earlier for better quality work.</p>
+            </div>
+            <div class="tip-item">
+                <i class="fas fa-book"></i>
+                <p><strong>Reading suggestion:</strong> Spend 15 minutes daily on English literature to improve comprehension scores.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card upcoming-card">
+        <div class="card-header">
+            <h2><i class="fas fa-calendar-alt"></i> Upcoming Tasks</h2>
+        </div>
+        <div class="card-body">
+            <div class="task-item">
+                <div class="task-icon pending">
+                    <i class="fas fa-circle"></i>
+                </div>
+                <div class="task-info">
+                    <h4>Math Homework Chapter 5</h4>
+                    <p class="task-due">Due: Tomorrow</p>
+                </div>
+            </div>
+            <div class="task-item">
+                <div class="task-icon pending">
+                    <i class="fas fa-circle"></i>
+                </div>
+                <div class="task-info">
+                    <h4>Science Lab Report</h4>
+                    <p class="task-due">Due: In 3 days</p>
+                </div>
+            </div>
+            <div class="task-item">
+                <div class="task-icon completed">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="task-info">
+                    <h4>History Essay</h4>
+                    <p class="task-due">Completed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card cta-card">
+        <div class="card-body text-center">
+            <i class="fas fa-prescription"></i>
+            <h3>Your Personalized Plan</h3>
+            <p>View AI-generated recommendations tailored just for you</p>
+            <a href="{{ url_for('prescriptions') }}" class="btn-primary">View Prescriptions</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

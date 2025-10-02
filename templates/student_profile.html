@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+{% set show_sidebar = true %}
+
+{% block title %}Student Profile - EduPrescript{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('teacher_dashboard') }}" class="nav-item">
+    <i class="fas fa-home"></i>
+    <span>Dashboard</span>
+</a>
+<a href="#" class="nav-item active">
+    <i class="fas fa-user"></i>
+    <span>Student Profile</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-chart-bar"></i>
+    <span>Analytics</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-bell"></i>
+    <span>Alerts</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-cog"></i>
+    <span>Settings</span>
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="profile-header">
+    <a href="{{ url_for('teacher_dashboard') }}" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+    <div class="profile-title">
+        <div class="profile-avatar-large">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="profile-info-header">
+            <h1>Emily Rodriguez</h1>
+            <div class="profile-meta">
+                <span class="meta-item"><i class="fas fa-graduation-cap"></i> Grade 10</span>
+                <span class="meta-item"><i class="fas fa-envelope"></i> emily.r@school.edu</span>
+                <span class="meta-item"><i class="fas fa-id-card"></i> Student ID: #2024-1001</span>
+            </div>
+            <span class="risk-badge-large high">High Risk</span>
+        </div>
+    </div>
+</div>
+
+<div class="profile-grid">
+    <div class="card overview-card">
+        <div class="card-header">
+            <h2><i class="fas fa-chart-pie"></i> Performance Overview</h2>
+        </div>
+        <div class="card-body">
+            <div class="overview-stats">
+                <div class="overview-stat">
+                    <div class="stat-icon-circle red">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>65%</h3>
+                        <p>Attendance Rate</p>
+                        <span class="trend down">-15% from last month</span>
+                    </div>
+                </div>
+                <div class="overview-stat">
+                    <div class="stat-icon-circle yellow">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>2.1</h3>
+                        <p>Current GPA</p>
+                        <span class="trend down">-0.3 from last term</span>
+                    </div>
+                </div>
+                <div class="overview-stat">
+                    <div class="stat-icon-circle blue">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>60%</h3>
+                        <p>Assignment Completion</p>
+                        <span class="trend down">6/10 completed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card chart-card">
+        <div class="card-header">
+            <h2><i class="fas fa-chart-line"></i> Attendance Trend</h2>
+        </div>
+        <div class="card-body">
+            <canvas id="attendanceChart"></canvas>
+        </div>
+    </div>
+
+    <div class="card chart-card">
+        <div class="card-header">
+            <h2><i class="fas fa-tasks"></i> Assignment Completion Rate</h2>
+        </div>
+        <div class="card-body">
+            <canvas id="assignmentChart"></canvas>
+        </div>
+    </div>
+
+    <div class="card prescriptions-card">
+        <div class="card-header">
+            <h2><i class="fas fa-prescription"></i> AI-Generated Prescriptions</h2>
+        </div>
+        <div class="card-body">
+            <div class="prescription-item">
+                <div class="prescription-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="prescription-content">
+                    <h3>Extra Tutoring Sessions</h3>
+                    <p>Schedule bi-weekly math tutoring to address declining performance in algebra concepts.</p>
+                    <span class="priority high">High Priority</span>
+                </div>
+            </div>
+            <div class="prescription-item">
+                <div class="prescription-icon">
+                    <i class="fas fa-user-friends"></i>
+                </div>
+                <div class="prescription-content">
+                    <h3>Peer Study Group</h3>
+                    <p>Connect Emily with study group for science class to improve engagement and understanding.</p>
+                    <span class="priority medium">Medium Priority</span>
+                </div>
+            </div>
+            <div class="prescription-item">
+                <div class="prescription-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="prescription-content">
+                    <h3>Attendance Monitoring</h3>
+                    <p>Weekly check-ins to understand barriers to attendance and provide support resources.</p>
+                    <span class="priority high">High Priority</span>
+                </div>
+            </div>
+            <div class="prescription-item">
+                <div class="prescription-icon">
+                    <i class="fas fa-book-reader"></i>
+                </div>
+                <div class="prescription-content">
+                    <h3>Customized Study Plan</h3>
+                    <p>Create structured daily study schedule focusing on time management and organization skills.</p>
+                    <span class="priority medium">Medium Priority</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card notes-card">
+        <div class="card-header">
+            <h2><i class="fas fa-sticky-note"></i> Teacher Notes</h2>
+        </div>
+        <div class="card-body">
+            <div class="notes-list">
+                <div class="note-item">
+                    <div class="note-meta">
+                        <span class="note-author">Ms. Johnson</span>
+                        <span class="note-date">Oct 1, 2025</span>
+                    </div>
+                    <p>Emily showed improvement in class participation this week. Needs encouragement to continue.</p>
+                </div>
+                <div class="note-item">
+                    <div class="note-meta">
+                        <span class="note-author">Mr. Davis</span>
+                        <span class="note-date">Sep 28, 2025</span>
+                    </div>
+                    <p>Missed two consecutive science labs. Parent contact made to discuss attendance concerns.</p>
+                </div>
+            </div>
+            <form class="add-note-form">
+                <textarea class="note-textarea" placeholder="Add a new note about this student..." rows="4"></textarea>
+                <button type="submit" class="btn-primary">Add Note</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card subjects-card">
+        <div class="card-header">
+            <h2><i class="fas fa-book-open"></i> Subject Performance</h2>
+        </div>
+        <div class="card-body">
+            <div class="subject-item">
+                <div class="subject-info">
+                    <h4>Mathematics</h4>
+                    <span class="grade-display">C-</span>
+                </div>
+                <div class="subject-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill red" style="width: 55%"></div>
+                    </div>
+                    <span>55%</span>
+                </div>
+            </div>
+            <div class="subject-item">
+                <div class="subject-info">
+                    <h4>English</h4>
+                    <span class="grade-display">B-</span>
+                </div>
+                <div class="subject-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill yellow" style="width: 72%"></div>
+                    </div>
+                    <span>72%</span>
+                </div>
+            </div>
+            <div class="subject-item">
+                <div class="subject-info">
+                    <h4>Science</h4>
+                    <span class="grade-display">C</span>
+                </div>
+                <div class="subject-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill yellow" style="width: 65%"></div>
+                    </div>
+                    <span>65%</span>
+                </div>
+            </div>
+            <div class="subject-item">
+                <div class="subject-info">
+                    <h4>History</h4>
+                    <span class="grade-display">B</span>
+                </div>
+                <div class="subject-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill green" style="width: 78%"></div>
+                    </div>
+                    <span>78%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+new Chart(attendanceCtx, {
+    type: 'line',
+    data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+        datasets: [{
+            label: 'Attendance %',
+            data: [85, 82, 78, 75, 70, 68, 65, 65],
+            borderColor: '#FF6B6B',
+            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+
+const assignmentCtx = document.getElementById('assignmentChart').getContext('2d');
+new Chart(assignmentCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Math', 'English', 'Science', 'History', 'Art'],
+        datasets: [{
+            label: 'Completion Rate',
+            data: [50, 75, 55, 80, 90],
+            backgroundColor: [
+                '#FF6B6B',
+                '#FFA94D',
+                '#FFD93D',
+                '#95E1D3',
+                '#A8E6CF'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

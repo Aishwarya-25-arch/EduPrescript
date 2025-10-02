@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% set show_sidebar = true %}
+
+{% block title %}My Prescriptions - EduPrescript{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('student_dashboard') }}" class="nav-item">
+    <i class="fas fa-home"></i>
+    <span>Dashboard</span>
+</a>
+<a href="{{ url_for('prescriptions') }}" class="nav-item active">
+    <i class="fas fa-clipboard-list"></i>
+    <span>My Prescriptions</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-user"></i>
+    <span>Profile</span>
+</a>
+<a href="#" class="nav-item">
+    <i class="fas fa-cog"></i>
+    <span>Settings</span>
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="prescriptions-header">
+    <div class="header-content">
+        <h1>Your Personalized Learning Plan</h1>
+        <p class="subtitle">AI-generated recommendations to help you succeed</p>
+    </div>
+    <div class="overall-progress">
+        <div class="progress-circle">
+            <svg width="120" height="120">
+                <circle cx="60" cy="60" r="50" stroke="#E8F4F8" stroke-width="10" fill="none"/>
+                <circle cx="60" cy="60" r="50" stroke="#4ECDC4" stroke-width="10" fill="none"
+                        stroke-dasharray="314" stroke-dashoffset="94.2"
+                        transform="rotate(-90 60 60)" stroke-linecap="round"/>
+            </svg>
+            <div class="progress-text">
+                <span class="progress-number">70%</span>
+                <span class="progress-label">Complete</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="motivational-banner">
+    <div class="banner-icon">
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="banner-content">
+        <h3>Keep going, you're improving!</h3>
+        <p>You've completed 7 out of 10 action items this week. Great progress!</p>
+    </div>
+</div>
+
+<div class="prescriptions-container">
+    <div class="prescription-section">
+        <h2 class="section-title">
+            <i class="fas fa-exclamation-circle"></i> High Priority Actions
+        </h2>
+
+        <div class="prescription-checklist">
+            <div class="checklist-item completed">
+                <label class="checkbox-container">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <div class="checklist-content">
+                    <h3>Complete Math Homework Chapter 5</h3>
+                    <p>Focus on algebraic equations. This will help improve your overall math grade.</p>
+                    <div class="checklist-meta">
+                        <span class="meta-tag"><i class="fas fa-clock"></i> Due: Tomorrow</span>
+                        <span class="meta-tag"><i class="fas fa-book"></i> Mathematics</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-item">
+                <label class="checkbox-container">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <div class="checklist-content">
+                    <h3>Attend Tutoring Session</h3>
+                    <p>One-on-one session with Mr. Davis to review concepts from last week's test.</p>
+                    <div class="checklist-meta">
+                        <span class="meta-tag"><i class="fas fa-calendar"></i> Thursday 3:30 PM</span>
+                        <span class="meta-tag"><i class="fas fa-chalkboard-teacher"></i> Room 204</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-item completed">
+                <label class="checkbox-container">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <div class="checklist-content">
+                    <h3>Submit Science Lab Report</h3>
+                    <p>Complete the chemistry experiment writeup from last Friday's lab.</p>
+                    <div class="checklist-meta">
+                        <span class="meta-tag success"><i class="fas fa-check-circle"></i> Submitted on time</span>
+                        <span class="meta-tag"><i class="fas fa-flask"></i> Science</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="prescription-section">
+        <h2 class="section-title">
+            <i class="fas fa-lightbulb"></i> Recommended Activities
+        </h2>
+
+        <div class="prescription-checklist">
+            <div class="checklist-item completed">
+                <label class="checkbox-container">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <div class="checklist-content">
+                    <h3>Join Study Group for English</h3>
+                    <p>Collaborate with peers on the upcoming literature essay. Study groups meet every Tuesday.</p>
+                    <div class="checklist-meta">
+                        <span class="meta-tag"><i class="fas fa-users"></i> 4 members</span>
+                        <span class="meta-tag"><i class="fas fa-book-open"></i> English</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-item">
+                <label class="checkbox-container">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <div class="checklist-content">
+                    <h3>Watch Khan Academy Videos</h3>
+                    <p>Review trigonometry fundamentals (30 minutes). This will prepare you for next week's quiz.</p>
+                    <div class="checklist-meta">
+                        <span class="meta-tag"><i class="fas fa-video"></i> 3 videos</span>
+                        <span class="meta-tag"><i class="fas fa-calculator"></i> Mathematics</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-item">
+                <label class="checkbox-container">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <div class="checklist-content">
+                    <h3>Practice Reading Comprehension</h3>
+                    <p>Spend 20 minutes daily reading and summarizing articles to improve comprehension skills.</p>
+                    <div class="checklist-meta">
+                        <span class="meta-tag"><i class="fas fa-newspaper"></i> Daily practice</span>
+                        <span class="meta-tag"><i class="fas fa-brain"></i> Skill building</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="prescription-section">
+        <h2 class="section-title">
+            <i class="fas fa-heart"></i> Wellness & Balance
+        </h2>
+
+        <div class="prescription-checklist">
+            <div class="checklist-item completed">
+                <label class="checkbox-container">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <div class="checklist-content">
+                    <h3>Set a Consistent Sleep Schedule</h3>
+                    <p>Aim for 8 hours of sleep each night. Better rest improves focus and memory retention.</p>
+                    <div class="checklist-meta">
+                        <span class="meta-tag"><i class="fas fa-moon"></i> 10:00 PM bedtime</span>
+                        <span class="meta-tag"><i class="fas fa-bed"></i> Wellness</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-item completed">
+                <label class="checkbox-container">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <div class="checklist-content">
+                    <h3>Take Regular Breaks While Studying</h3>
+                    <p>Use the Pomodoro technique: 25 minutes of study, 5-minute break. Prevents burnout.</p>
+                    <div class="checklist-meta">
+                        <span class="meta-tag"><i class="fas fa-clock"></i> Every 25 minutes</span>
+                        <span class="meta-tag"><i class="fas fa-coffee"></i> Study tips</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-item">
+                <label class="checkbox-container">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <div class="checklist-content">
+                    <h3>Talk to School Counselor</h3>
+                    <p>Schedule a check-in to discuss time management strategies and stress management.</p>
+                    <div class="checklist-meta">
+                        <span class="meta-tag"><i class="fas fa-user-md"></i> Ms. Anderson</span>
+                        <span class="meta-tag"><i class="fas fa-calendar-check"></i> This week</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="progress-summary-card">
+    <h2><i class="fas fa-chart-line"></i> Your Progress This Week</h2>
+    <div class="summary-stats">
+        <div class="summary-stat">
+            <div class="stat-icon green">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="stat-info">
+                <h3>7</h3>
+                <p>Tasks Completed</p>
+            </div>
+        </div>
+        <div class="summary-stat">
+            <div class="stat-icon blue">
+                <i class="fas fa-list"></i>
+            </div>
+            <div class="stat-info">
+                <h3>3</h3>
+                <p>Tasks Remaining</p>
+            </div>
+        </div>
+        <div class="summary-stat">
+            <div class="stat-icon yellow">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="stat-info">
+                <h3>5</h3>
+                <p>Day Streak</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

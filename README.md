@@ -4,7 +4,7 @@ A Flask-based web application designed to help teachers monitor student academic
 
 ## Live Demo
 
-**Live URL:** [Open EduPrescript]https://edu-prescript.vercel.app/student/dashboard
+**Live URL:** [Open EduPrescript]https://edu-prescript.vercel.app/
 
 ## Features
 

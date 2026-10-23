@@ -20,7 +20,10 @@ def login():
 
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT id FROM users WHERE email=? AND password=? AND role=?", (email, password, role))
+        cursor.execute(
+    "SELECT id FROM users WHERE email=? AND password=? AND LOWER(role)=?",
+    (email, password, role)
+)
         user = cursor.fetchone()
         conn.close()
 
@@ -71,20 +74,42 @@ def register():
 
 @app.route('/student/dashboard')
 def student_dashboard():
-    print("Session user_id:", session.get('user_id'))
-    print("Session role:", session.get('role'))
-
     if session.get('role') != 'student':
         return redirect(url_for('login'))
 
     user_id = session.get('user_id')
+    print("Logged-in user ID:", user_id)
+
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT name, grade, attendance, assignments_done, assignments_total, risk_score FROM students WHERE user_id=?", (user_id,))
-    student = cursor.fetchone()
+
+    cursor.execute(
+        """SELECT name, grade, attendance, assignments_done,
+                  assignments_total, risk_score
+           FROM students WHERE user_id=?""",
+        (user_id,)
+    )
+
+    student_row = cursor.fetchone()
     conn.close()
 
-    return render_template('student_dashboard.html', student=student, show_sidebar=True)
+    student = None
+
+    if student_row:
+        student = {
+            'name': student_row[0],
+            'grade': student_row[1],
+            'attendance': student_row[2],
+            'assignments_done': student_row[3],
+            'assignments_total': student_row[4],
+            'risk_score': student_row[5]
+        }
+
+    return render_template(
+        'student_dashboard.html',
+        student=student,
+        show_sidebar=True
+    )
 
 
 @app.route('/teacher/dashboard')
@@ -109,20 +134,50 @@ def student_profile(student_id):
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT name, grade, attendance, assignments_done, assignments_total, risk_score FROM students WHERE id=?", (student_id,))
 
+    cursor.execute(
+        """SELECT name, grade, attendance, assignments_done,
+                  assignments_total, risk_score
+           FROM students WHERE id=?""",
+        (student_id,)
+    )
+    student_row = cursor.fetchone()
 
-    student = cursor.fetchone()
-
-    cursor.execute("SELECT item, completed FROM prescriptions WHERE student_id=?", (student_id,))
+    cursor.execute(
+        "SELECT item, completed FROM prescriptions WHERE student_id=?",
+        (student_id,)
+    )
     prescriptions = cursor.fetchall()
 
-    cursor.execute("SELECT teacher_note FROM notes WHERE student_id=?", (student_id,))
+    cursor.execute(
+        "SELECT teacher_note FROM notes WHERE student_id=?",
+        (student_id,)
+    )
     note = cursor.fetchone()
 
     conn.close()
 
-    return render_template('student_profile.html', student=student, prescriptions=prescriptions, note=note, show_sidebar=True)
+    student = None
+    if student_row:
+        student = {
+            'name': student_row[0],
+            'grade': student_row[1],
+            'attendance': student_row[2],
+            'assignments_done': student_row[3],
+            'assignments_total': student_row[4],
+            'risk_score': student_row[5]
+        }
+
+    if not student:
+        return redirect(url_for('teacher_dashboard'))
+
+    return render_template(
+        'student_profile.html',
+        student=student,
+        prescriptions=prescriptions,
+        note=note,
+        show_sidebar=True
+    )
 
 
 @app.route('/student/prescriptions')

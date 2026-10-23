@@ -24,7 +24,7 @@
 
 {% block content %}
 <div class="dashboard-header">
-    <h1>Welcome back, Alex!</h1>
+    <h1>Welcome back, {{ student.name }}!</h1>
     <p class="subtitle">Here's your academic progress overview</p>
 </div>
 
@@ -37,7 +37,7 @@
             <div class="avatar">
                 <i class="fas fa-user"></i>
             </div>
-            <h3>Alex Johnson</h3>
+            <h3>{{ student.name }}</h3>
             <p class="grade-badge">Grade 10</p>
             <div class="profile-stats">
                 <div class="stat-item">
@@ -100,7 +100,8 @@
                     <h3>Low Risk</h3>
                 </div>
             </div>
-            <p class="risk-message">You're doing great! Keep up the good work and stay on track with your assignments.</p>
+            <p class="risk-message">You're doing great! Keep up the good work and stay on track with your assignments.
+            </p>
         </div>
     </div>
 
@@ -111,15 +112,18 @@
         <div class="card-body">
             <div class="tip-item">
                 <i class="fas fa-star"></i>
-                <p><strong>Great job on math!</strong> Your recent test scores show improvement. Consider reviewing algebra concepts to maintain this momentum.</p>
+                <p><strong>Great job on math!</strong> Your recent test scores show improvement. Consider reviewing
+                    algebra concepts to maintain this momentum.</p>
             </div>
             <div class="tip-item">
                 <i class="fas fa-clock"></i>
-                <p><strong>Time management tip:</strong> You tend to submit assignments close to deadlines. Try starting 2 days earlier for better quality work.</p>
+                <p><strong>Time management tip:</strong> You tend to submit assignments close to deadlines. Try starting
+                    2 days earlier for better quality work.</p>
             </div>
             <div class="tip-item">
                 <i class="fas fa-book"></i>
-                <p><strong>Reading suggestion:</strong> Spend 15 minutes daily on English literature to improve comprehension scores.</p>
+                <p><strong>Reading suggestion:</strong> Spend 15 minutes daily on English literature to improve
+                    comprehension scores.</p>
             </div>
         </div>
     </div>
